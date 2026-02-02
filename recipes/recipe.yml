@@ -11,7 +11,7 @@ modules:
     files:
       - source: system
         destination: /
-      - source: files/etc/greetd/config.toml
+      - source: etc/greetd/config.toml
         destination: /etc/greetd/config.toml
 
   - type: dnf
