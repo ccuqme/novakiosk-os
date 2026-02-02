@@ -10,7 +10,7 @@ default browser, plus the dependencies required by both
 This image is intentionally small and focused. It includes packages used for:
 - Remote control via terminal access (`node-pty`; requires build-time tooling such as `gcc-c++`)
 - Remote control via VNC (`wayvnc`)
-- Virtual keyboard automation (`ydotool` for novakeys)
+- Virtual keyboard automation (`ydotool` for novakiosk to send signals to browser)
 - Secure access and management (`openssl` and `openssh-server`)
 
 This project was built for [NOVA Spektrum](https://novaspektrum.no) in Norway and is
