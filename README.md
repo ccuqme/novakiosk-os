@@ -1,8 +1,23 @@
 # novakiosk-os &nbsp; [![bluebuild build badge](https://github.com/ccuqme/novakiosk-os/actions/workflows/build.yml/badge.svg)](https://github.com/ccuqme/novakiosk-os/actions/workflows/build.yml)
 
-See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
+novakiosk-os is a minimal [BlueBuild](https://blue-build.org) OS image recipe for
+[novakiosk](https://github.com/ccemqu/novakiosk) kiosks. It provides a
+Sway-based auto-login session for a dedicated kiosk user, with Firefox as the
+default browser, plus the dependencies required by both
+[novakiosk](https://github.com/ccemqu/novakiosk) and
+[novakeys](https://github.com/ccemqu/novakeys).
 
-After setup, it is recommended you update this README to describe your custom image.
+This image is intentionally small and focused. It includes packages used for:
+- Remote control via terminal access (`node-pty`; requires build-time tooling such as `gcc-c++`)
+- Remote control via VNC (`wayvnc`)
+- Virtual keyboard automation (`ydotool` for novakeys)
+- Secure access and management (`openssl` and `openssh-server`)
+
+This project was built for [NOVA Spektrum](https://novaspektrum.no) in Norway and is
+published with their permission. It is maintained by the author personally and
+is not maintained, supported, or warranted by NOVA Spektrum.
+
+NOVA Spektrum is a registered name and is not covered by this license.
 
 ## Installation
 
@@ -28,16 +43,5 @@ To rebase an existing atomic Fedora installation to the latest build:
   systemctl reboot
   ```
 
-The `latest` tag will automatically point to the latest build. That build will still always use the Fedora version specified in `recipe.yml`, so you won't get accidentally updated to the next major version.
-
 ## ISO
-
-If build on Fedora Atomic, you can generate an offline ISO with the instructions available [here](https://blue-build.org/learn/universal-blue/#fresh-install-from-an-iso). These ISOs cannot unfortunately be distributed on GitHub for free due to large sizes, so for public projects something else has to be used for hosting.
-
-## Verification
-
-These images are signed with [Sigstore](https://www.sigstore.dev/)'s [cosign](https://github.com/sigstore/cosign). You can verify the signature by downloading the `cosign.pub` file from this repo and running the following command:
-
-```bash
-cosign verify --key cosign.pub ghcr.io/ccuqme/novakiosk-os
-```
+Download link to be added at a later date.
