@@ -70,6 +70,10 @@ Checksum (SHA256): 8a7109c62a62cae021691adf88f6028b8ad822dbf0d3a5cb1cf3732c7a974
 
 [Download](http://static.nova.onl/novakiosk-os.iso)
 
+Note: After the first installation, you will be prompted to enroll the secure boot key in the BIOS.
+
+Enter the password `universalblue` when prompted to enroll the key.
+
 ## Customization
 
 ### Change the kiosk username

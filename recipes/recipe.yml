@@ -22,8 +22,10 @@ modules:
         - gcc-c++
         - gtk4-layer-shell
         - NetworkManager-tui
+        - ethtool
         - openssl
         - openssl-devel
+        - sudo
         - wayvnc
         - ydotool
         - openssh-server
@@ -41,6 +43,7 @@ modules:
         - ydotool.service
         - greetd.service
         - cups.service
+        - novakiosk-wol.service
 
   - type: default-flatpaks
     configurations:
