@@ -14,11 +14,40 @@ this image provides the Sway session + browser and the OS-level dependencies tha
 
 - Sway session with auto-login via `greetd` (starts Sway as the `kiosk` user)
 - Firefox as a system Flatpak (`org.mozilla.firefox`) for kiosk display
+- Firefox enterprise policies for kiosk defaults (including auto-installing selected extensions)
 - `ydotool` for kiosk agent automation (e.g. forcing refresh / sending input)
 - `wayvnc` for remote view/control (used by novakiosk’s VNC feature)
 - `openssh-server` + `openssl` for direct SSH access and key management
 - Build tooling used by kiosk-agent dependencies (e.g. `gcc-c++`/`make`/`python3` for `node-pty`, used for
   novakiosk's built-in web terminal) + `libatomic` for some Node.js runtimes
+
+## Firefox policies & extensions (Flatpak)
+
+Firefox is installed from Flathub as a system Flatpak (`org.mozilla.firefox`). We manage Firefox defaults
+(including extensions) using Firefox Enterprise Policies via the Flatpak `org.mozilla.firefox.systemconfig`
+extension point.
+
+Policy source (in the image):
+
+- `/usr/share/novakiosk/firefox/policies/policies.json`
+
+Policy location (generated on boot; treated as image-managed and refreshed on every boot):
+
+- `/var/lib/flatpak/extension/org.mozilla.firefox.systemconfig/<arch>/stable/policies/policies.json`
+
+Included extensions (auto-installed via policy):
+
+- “I still don’t care about cookies” — needed because the novakiosk receiver renders sites inside an iframe,
+  so cookie banners tend to reappear frequently during navigation.
+
+Other kiosk defaults applied via policy:
+
+- Disable password saving / password manager UI
+- Disable form history + address/credit card autofill
+- Disable telemetry, studies, Pocket, Firefox Accounts, and feedback prompts
+- Disable Developer Tools and block `about:config`
+- Force links opened by sites to reuse the same tab (best-effort; depends on site behavior)
+- Work around a Firefox Wayland `-kiosk` black-screen issue by setting `widget.wayland.vsync.enabled=false`
 
 ## Intended use
 
