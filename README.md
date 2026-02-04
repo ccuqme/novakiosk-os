@@ -4,15 +4,15 @@
 ![License](https://img.shields.io/github/license/ccuqme/novakiosk-os)
 
 `novakiosk-os` is a minimal [BlueBuild](https://blue-build.org) Fedora Atomic image recipe
-for kiosk machines managed by [novakiosk](https://github.com/ccemqu/novakiosk) (optionally
-with [novakeys](https://github.com/ccemqu/novakeys)).
+for kiosk machines managed by [novakiosk](https://github.com/ccuqme/novakiosk) (optionally
+with [novakeys](https://github.com/ccuqme/novakeys)).
 
 `novakiosk` communicates with a kiosk agent running on the kiosk machine; 
 this image provides the Sway session + browser and the OS-level dependencies that the kiosk agent expects.
 
 ## What’s included
 
-- Sway session with auto-login via `greetd` (starts Sway as the `nova` user)
+- Sway session with auto-login via `greetd` (starts Sway as the `kiosk` user)
 - Firefox as a system Flatpak (`org.mozilla.firefox`) for kiosk display
 - `ydotool` for kiosk agent automation (e.g. forcing refresh / sending input)
 - `wayvnc` for remote view/control (used by novakiosk’s VNC feature)
@@ -64,25 +64,19 @@ To rebase an existing Fedora Atomic system to the latest build:
 
 ## ISO
 
-Prebuilt ISO snapshot: `novakiosk-os.iso` (built February 2026)
+Prebuilt ISO snapshot: [novakiosk-os-20260204.iso](http://static.nova.onl/novakiosk-os-20260204.iso)
 
-Checksum (SHA256): 1a4ba579398bdf6a006ac705bc5a09bb1c0e3e18697b32a302f0f5569f712ad5
-
-[Download](http://static.nova.onl/novakiosk-os-20260203.iso)
+Checksum (SHA256): 4cee2533177386a18f4d3055b23badb8326d3f6cbce444e46084dd3d3b269262
 
 Note: After the first installation, you will be prompted to enroll the secure boot key in the BIOS.
 
 Enter the password `universalblue` when prompted to enroll the key.
 
-## Customization
+### Passwords / sudo / SSH
 
-### Change the kiosk username
+This image auto-logs into the `kiosk` account locally. The `kiosk` user is created at boot (via `systemd-sysusers`) and is intended to be a dedicated kiosk/service user, not your day-to-day admin account.
 
-The kiosk user is hard-coded to `nova` and is created at image build time (via `sysusers.d`
-and `tmpfiles.d`). To change it, fork the repo and update all of the following:
-
-- `files/etc/greetd/config.toml` (the `initial_session.user`)
-- `files/system/usr/lib/sysusers.d/90-novakiosk.conf` (the user/group definition)
-- `files/system/usr/lib/tmpfiles.d/90-novakiosk.conf` (home directory creation/ownership)
-
-After changing these, build/publish your forked image and rebase to your own image reference.
+Important:
+- Create a **separate admin user** during installation and use **that** user for SSH and administrative tasks. Do **not** name your admin user `kiosk`.
+- The `kiosk` user’s password is **locked** by default (no password login). This is intentional and helps avoid interactive logins as `kiosk`.
+- In this setup, `kiosk` has elevated privileges, but is expected to rely only on *explicitly allowed* passwordless sudo rules (for example, `systemctl reboot` / `poweroff`). Because `kiosk` can’t authenticate with a password, any `sudo` command that requires authentication (for example `sudo -i`) will fail; only `NOPASSWD:` (or other non-password) rules will work.
