@@ -20,6 +20,9 @@ modules:
         - sway
         - xorg-x11-server-Xwayland
         - gcc-c++
+        - make
+        - python3
+        - libatomic
         - gtk4-layer-shell
         - NetworkManager-tui
         - ethtool

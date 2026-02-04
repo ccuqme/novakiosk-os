@@ -17,8 +17,8 @@ this image provides the Sway session + browser and the OS-level dependencies tha
 - `ydotool` for kiosk agent automation (e.g. forcing refresh / sending input)
 - `wayvnc` for remote view/control (used by novakiosk’s VNC feature)
 - `openssh-server` + `openssl` for direct SSH access and key management
-- Build tooling used by kiosk-agent dependencies (e.g. `gcc-c++` for `node-pty`, used for novakiosk's
-  built-in web terminal)
+- Build tooling used by kiosk-agent dependencies (e.g. `gcc-c++`/`make`/`python3` for `node-pty`, used for
+  novakiosk's built-in web terminal) + `libatomic` for some Node.js runtimes
 
 ## Intended use
 
