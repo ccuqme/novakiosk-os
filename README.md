@@ -4,8 +4,8 @@
 ![License](https://img.shields.io/github/license/ccuqme/novakiosk-os)
 
 `novakiosk-os` is a minimal [BlueBuild](https://blue-build.org) Fedora Atomic image recipe
-for kiosk machines managed by [novakiosk](https://github.com/ccuqme/novakiosk) (optionally
-with [novakeys](https://github.com/ccuqme/novakeys)).
+for kiosk machines managed by [novakiosk](https://github.com/novakiosk/novakiosk) (optionally
+with [novakeys](https://github.com/novakiosk/novakeys)).
 
 `novakiosk` communicates with a kiosk agent running on the kiosk machine; 
 this image provides the Sway session + browser and the OS-level dependencies that the kiosk agent expects.

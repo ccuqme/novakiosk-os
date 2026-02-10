@@ -46,6 +46,8 @@ modules:
         - ydotool.service
         - greetd.service
         - cups.service
+        - novakiosk-enable-linger.service
+        - novakiosk-wayvnc-firewall.service
         - novakiosk-wol.service
 
   - type: default-flatpaks
